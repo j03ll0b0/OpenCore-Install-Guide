@@ -154,16 +154,29 @@ In terminal:
 ### Legacy Install Setup from Linux:
 
 cd Utilities/LegacyBoot/
+
 cp boot1f32 boot1
+
 sudo dd if=/dev/sdx bs=512 count=1 >origMBR
+
 cp origMBR newMBR
+
 dd if=boot0 of=newMBR bs=440 count=1 conv=notrunc
+
 sudo dd if=/dev/sdx1 bs=512 count=1 >origPBR1
+
 cp boot1 newPBR1
+
 dd if=origPBR1 of=newPBR1 skip=3 seek=3 bs=1 count=87 conv=notrunc
+
 sudo dd if=/dev/sdx1 skip=6 bs=512 count=1 >origPBR2
+
 cp boot1 newPBR2
+
 dd if=origPBR2 of=newPBR2 skip=3 seek=3 bs=1 count=87 conv=notrunc
+
 sudo dd if=newPBR1 of=/dev/sdx1 bs=512 count=1 conv=nocreat,notrunc
+
 sudo dd if=newPBR2 of=/dev/sdx1 seek=6 bs=512 count=1 conv=nocreat,notrunc
+
 sudo dd if=newMBR of=/dev/sdx bs=512 count=1 conv=nocreat,notrunc
